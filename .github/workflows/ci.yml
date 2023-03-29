@@ -1,0 +1,21 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: 
+      - main
+  workflow_dispatch:
+  
+jobs:
+  build: 
+    runs-on: ubunt-latest
+    steps:
+      - uses: action.checkiut@v2
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3.0.3
+        with: 
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Buikd
+        run: dotnet build --no-restore
